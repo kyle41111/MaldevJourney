@@ -1,0 +1,142 @@
+sanity check:
+NTSTATUS NtTestAlert();
+
+
+
+NTSTATUS NtAdjustPrivilegesToken(
+        IN HANDLE TokenHandle,
+        IN BOOLEAN DisableAllPrivileges,
+        IN PTOKEN_PRIVILEGES NewState OPTIONAL,
+        IN ULONG BufferLength,
+        OUT PTOKEN_PRIVILEGES PreviousState OPTIONAL,
+        OUT PULONG ReturnLength OPTIONAL);
+
+
+
+NTSTATUS NtUnmapViewOfSection(
+        IN HANDLE ProcessHandle,
+        IN PVOID BaseAddress);
+        
+        
+NTSTATUS NtOpenSection(
+        OUT PHANDLE SectionHandle,
+        IN ACCESS_MASK DesiredAccess,
+        IN POBJECT_ATTRIBUTES ObjectAttributes);
+        
+NTSTATUS NtMapViewOfSection(
+        IN HANDLE SectionHandle,
+        IN HANDLE ProcessHandle,
+        IN OUT PVOID BaseAddress,
+        IN ULONG ZeroBits,
+        IN SIZE_T CommitSize,
+        IN OUT PLARGE_INTEGER SectionOffset OPTIONAL,
+        IN OUT PSIZE_T ViewSize,
+        IN SECTION_INHERIT InheritDisposition,
+        IN ULONG AllocationType,
+        IN ULONG Win32Protect);
+
+NTSTATUS NtAdjustPrivilegesToken(
+        IN HANDLE TokenHandle,
+        IN BOOLEAN DisableAllPrivileges,
+        IN PTOKEN_PRIVILEGES NewState OPTIONAL,
+        IN ULONG BufferLength,
+        OUT PTOKEN_PRIVILEGES PreviousState OPTIONAL,
+        OUT PULONG ReturnLength OPTIONAL);
+        
+NTSTATUS NtCreateSection(
+        OUT PHANDLE SectionHandle,
+        IN ACCESS_MASK DesiredAccess,
+        IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL,
+        IN PLARGE_INTEGER MaximumSize OPTIONAL,
+        IN ULONG SectionPageProtection,
+        IN ULONG AllocationAttributes,
+        IN HANDLE FileHandle OPTIONAL);
+        
+        
+NTSTATUS NtFreeVirtualMemory(
+        IN HANDLE ProcessHandle,
+        IN OUT PVOID * BaseAddress,
+        IN OUT PSIZE_T RegionSize,
+        IN ULONG FreeType);
+
+    
+    NTSTATUS NtWriteVirtualMemory(
+        IN HANDLE ProcessHandle,
+        IN PVOID BaseAddress,
+        IN PVOID Buffer,
+        IN SIZE_T NumberOfBytesToWrite,
+        OUT PSIZE_T NumberOfBytesWritten OPTIONAL);
+ 
+NTSTATUS NtReadVirtualMemory(
+        IN HANDLE ProcessHandle,
+        IN PVOID BaseAddress OPTIONAL,
+        OUT PVOID Buffer,
+        IN SIZE_T BufferSize,
+        OUT PSIZE_T NumberOfBytesRead OPTIONAL);
+
+
+
+NTSTATUS NtClose(
+        IN HANDLE Handle);
+
+NTSTATUS NtOpenThread(
+        OUT PHANDLE ThreadHandle,
+        IN ACCESS_MASK DesiredAccess,
+        IN POBJECT_ATTRIBUTES ObjectAttributes,
+        IN PCLIENT_ID ClientId OPTIONAL);
+
+NTSTATUS NtSuspendProcess(
+        IN HANDLE ProcessHandle);
+
+NTSTATUS NtSuspendThread(
+        IN HANDLE ThreadHandle,
+        OUT PULONG PreviousSuspendCount);
+
+NTSTATUS NtResumeProcess(
+        IN HANDLE ProcessHandle);
+
+NTSTATUS NtResumeThread(
+        IN HANDLE ThreadHandle,
+        IN OUT PULONG PreviousSuspendCount OPTIONAL);
+NTSTATUS NtGetContextThread(
+        IN HANDLE ThreadHandle,
+        IN OUT PCONTEXT ThreadContext);
+
+NTSTATUS NtSetContextThread(
+        IN HANDLE ThreadHandle,
+        IN PCONTEXT Context);
+        
+ 
+NTSTATUS NtOpenProcess(
+        OUT PHANDLE ProcessHandle,
+        IN ACCESS_MASK DesiredAccess,
+        IN POBJECT_ATTRIBUTES ObjectAttributes,
+        IN PCLIENT_ID ClientId OPTIONAL);
+
+NTSTATUS NtOpenProcessToken(
+        IN HANDLE ProcessHandle,
+        IN ACCESS_MASK DesiredAccess,
+        OUT PHANDLE TokenHandle);
+
+NTSTATUS NtCreateProcess(
+        OUT PHANDLE ProcessHandle,
+        IN ACCESS_MASK DesiredAccess,
+        IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL,
+        IN HANDLE ParentProcess,
+        IN BOOLEAN InheritObjectTable,
+        IN HANDLE SectionHandle OPTIONAL,
+        IN HANDLE DebugPort OPTIONAL,
+        IN HANDLE ExceptionPort OPTIONAL);
+
+NTSTATUS NtCreateThreadEx(
+        OUT PHANDLE ThreadHandle,
+        IN ACCESS_MASK DesiredAccess,
+        IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL,
+        IN HANDLE ProcessHandle,
+        IN PVOID StartRoutine,
+        IN PVOID Argument OPTIONAL,
+        IN ULONG CreateFlags,
+        IN SIZE_T ZeroBits,
+        IN SIZE_T StackSize,
+        IN SIZE_T MaximumStackSize,
+        IN PPS_ATTRIBUTE_LIST AttributeList OPTIONAL);
