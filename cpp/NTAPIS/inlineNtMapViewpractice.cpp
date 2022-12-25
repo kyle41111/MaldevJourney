@@ -87,14 +87,16 @@ EXTERN_C NTSTATUS NtCreateThreadEx(
     IN SIZE_T MaximumStackSize,
     IN PPS_ATTRIBUTE_LIST AttributeList OPTIONAL);
 
-
-NTSTATUS NtOpenProcess(OUT PHANDLE ProcessHandle, IN ACCESS_MASK DesiredAccess, IN POBJECT_ATTRIBUTES ObjectAttributes, IN PCLIENT_ID ClientId OPTIONAL);
-NTSTATUS NtAllocateVirtualMemory(IN HANDLE ProcessHandle, IN OUT PVOID* BaseAddress, IN ULONG ZeroBits, IN OUT PSIZE_T RegionSize, IN ULONG AllocationType, IN ULONG Protect);
-NTSTATUS NtWriteVirtualMemory(IN HANDLE ProcessHandle, IN PVOID BaseAddress, IN PVOID Buffer, IN SIZE_T NumberOfBytesToWrite, OUT PSIZE_T NumberOfBytesWritten OPTIONAL);
-NTSTATUS NtCreateThreadEx(OUT PHANDLE ThreadHandle, IN ACCESS_MASK DesiredAccess, IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL, IN HANDLE ProcessHandle, IN PVOID StartRoutine, IN PVOID Argument OPTIONAL, IN ULONG CreateFlags, IN SIZE_T ZeroBits, IN SIZE_T StackSize, IN SIZE_T MaximumStackSize, IN PPS_ATTRIBUTE_LIST AttributeList OPTIONAL);
-
+EXTERN_C NTSTATUS NtProtectVirtualMemory(
+    IN HANDLE ProcessHandle,
+    IN OUT PVOID* BaseAddress,
+    IN OUT PSIZE_T RegionSize,
+    IN ULONG NewProtect,
+    OUT PULONG OldProtect);
 
 NTSTATUS NtClose(IN HANDLE Handle);
+
+
 
 int main(int argc, char* argv[])
 {
@@ -151,3 +153,4 @@ INLINE_SYSCALL(NtClose)(hThread);
 
 return 0;
 }
+
