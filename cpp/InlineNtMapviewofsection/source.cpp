@@ -96,8 +96,6 @@ NTSTATUS NtProtectVirtualMemory(
 
 NTSTATUS NtClose(IN HANDLE Handle);
 
-
-
 int main(int argc, char* argv[])
 {
     jm::init_syscalls_list();
