@@ -53,13 +53,13 @@ typedef struct _PS_ATTRIBUTE_LIST
     PS_ATTRIBUTE Attributes[1];
 } PS_ATTRIBUTE_LIST, * PPS_ATTRIBUTE_LIST;
 
-EXTERN_C NTSTATUS NtOpenProcess(
+ NTSTATUS NtOpenProcess(
     OUT PHANDLE ProcessHandle,
     IN ACCESS_MASK DesiredAccess,
     IN POBJECT_ATTRIBUTES ObjectAttributes,
     IN PCLIENT_ID ClientId OPTIONAL);
 
-EXTERN_C NTSTATUS NtAllocateVirtualMemory(
+ NTSTATUS NtAllocateVirtualMemory(
     IN HANDLE ProcessHandle,
     IN OUT PVOID* BaseAddress,
     IN ULONG ZeroBits,
