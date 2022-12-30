@@ -1,7 +1,6 @@
-My maldev journey!
+Welcome!
 
-My journey and progress through malware dev for redteaming purposes.
-Learning Offensive cpp/c# for rtl/threat emulation. This will be a repo of my beginner projects while I attempt to go further in Offensive tooling/evasion.
+My journey and progress learning Offensive cpp/c# for rtl/threat emulation. This will be a repo of my beginner projects while I attempt to go further in Offensive tooling/evasion.
 
 I currently am using this library:
 https://github.com/JustasMasiulis/inline_syscall
